@@ -1,27 +1,52 @@
 <template>
   <div class="wrapper-controls">
-    <button class="control btn-new"
-      v-on:click="newGame"
-    >
+
+    <button class="control btn-new" v-on:click="newGame">
       <i class="ion-ios-plus-outline"></i>New game
     </button>
-    <button class="control btn-roll"><i class="ion-ios-loop"></i>Roll dice</button>
-    <button class="control btn-hold"><i class="ion-ios-download-outline"></i>Hold</button>
 
-    <input type="number" placeholder="Final score" class="final-score" />
+    <button class="control btn-roll" v-on:click="rollDice">
+      <i class="ion-ios-loop"></i>Roll dice
+    </button>
+
+    <button class="control btn-hold" v-on:click="$emit('handleHoldScore')">
+      <i class="ion-ios-download-outline"></i>Hold
+    </button>
+
+    <input
+      :disabled="isPlaying"
+      :value="finalScore"
+      v-on:input="$emit('handleChangeHandleScore', $event)"
+     type="number" placeholder="Final score" class="final-score" />
   </div>
 </template>
 
 <script>
 export default {
   name: 'control',
+  props: {
+    finalScore: {
+      type: [Number, String],
+      default: 100
+    },
+    isPlaying: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
-    return {}
+    return {
+      valueDemo: 20
+    }
   },
   methods: {
     newGame() {
       console.log('New game');
       this.$emit('handleNewgame');
+    },
+    rollDice() {
+      console.log('RollDice Controls.vue');
+      this.$emit('handleRolldice');
     }
   }
 };

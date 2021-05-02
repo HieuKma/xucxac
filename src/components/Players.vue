@@ -4,7 +4,7 @@
       :class="{active: activePlayer == 0}"
     >
       <div class="player-name">Player 1</div>
-      <div class="player-score">{{ scorePalyers[0] }}</div>
+      <div class="player-score">{{ scorePlayers[0] }}</div>
       <div class="player-current-box">
         <div class="player-current-label">Current</div>
         <div class="player-current-score">{{ activePlayer == 0 ? currentScore : 0 }}</div>
@@ -15,7 +15,7 @@
       :class="{active: activePlayer == 1}"
     >
       <div class="player-name">Player 2</div>
-      <div class="player-score">{{ scorePalyers[1] }}</div>
+      <div class="player-score">{{ scorePlayers[1] }}</div>
       <div class="player-current-box">
         <div class="player-current-label">Current</div>
         <div class="player-current-score">{{ activePlayer == 1 ? currentScore : 0 }}</div>
@@ -29,7 +29,7 @@ export default {
   name: 'players',
   props: {
     activePlayer: { type: Number, default: 0 },
-    scorePalyers: { type: Array, default: [0, 0] },
+    scorePlayers: { type: Array, default: [0, 0] },
     currentScore: { type: Number, default: 0 }
   },
   data() {
