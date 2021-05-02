@@ -2,10 +2,10 @@
   <div id="app">
     <div class="wrapper clearfix">
       <players
+        :isWinner="isWinner"
         :activePlayer="activePlayer"
         :scorePlayers="scorePlayers"
-        :currentScore="currentScore"
-      >
+        :currentScore="currentScore">
       </players>
 
       <controls
@@ -36,10 +36,10 @@ export default {
       isPlaying: false,
       isOpenPopup: false,
       activePlayer: 0,
-      scorePlayers: [20, 55],
+      scorePlayers: [0, 0],
       dices: [5, 3],
-      currentScore: 30,
-      finalScore: 100,
+      currentScore: 0,
+      finalScore: 10,
     };
   },
   components: {
@@ -65,7 +65,9 @@ export default {
         //     cloneScorePLayer[activePlayer] = scoreOld + currentScore;
         // this.scorePlayers = cloneScorePLayer;
         this.$set(this.scorePlayers, activePlayer, currentScore + scoreOld);
-        this.nextPlayer();
+        if(!this.isWinner) {
+          this.nextPlayer();
+        }
       } else {
         alert('Click Newgame');
       }
@@ -107,6 +109,16 @@ export default {
       this.isOpenPopup = true;
     }
   },
+  computed: {
+    isWinner() {
+      let { scorePlayers, finalScore } = this;
+      if(scorePlayers[0] >= finalScore || scorePlayers[1] >=finalScore) {
+        this.isPlaying = false;
+        return true;
+      }
+      return false;
+    }
+  }
 };
 </script>
 
